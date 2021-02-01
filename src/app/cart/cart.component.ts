@@ -60,7 +60,7 @@ export class CartComponent implements OnInit {
     this.pizzaService.saveCartData(item)
     this.getCartItems()
   }
-  removeItem(item,i){
+  removeItem(item){
 
     this.pizzaService.quantityChanged(item);
     this.getCartItems();

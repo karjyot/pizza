@@ -35,9 +35,9 @@
                         </div>
                         <div>
                           <div class="def-number-input number-input safari_only mb-0 w-100">
-                            <button (click)="removeItem(item, i)" [disabled]="qty[i] <=1"><i class="fa fa-minus"></i></button>
+                            <button (click)="removeItem(item)" [disabled]="qty[i] <=1"><i class="fa fa-minus"></i></button>
                             <input class="quantity" id ="qty" min="0" max="10" name="quantity"   [(ngModel)]="qty[i]" type="number" disabled>
-                            <button (click)="changeItemCount(item, 1)"  [disabled]="qty[i] >=10"><i class="fa fa-plus"></i></button>
+                            <button (click)="changeItemCount(item)"  [disabled]="qty[i] >=10"><i class="fa fa-plus"></i></button>
                           </div>
                         </div>
                       </div>
