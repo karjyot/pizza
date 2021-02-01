@@ -1,7 +1,10 @@
 [{
-    "name":"Orignal"
+    "name":"Orignal",
+    "price":0
 },{
-    "name":"Gluten Free"
+    "name":"Gluten Free",
+    "price":4
 },{
-    "name":"Vegan"
+    "name":"Vegan",
+    "price":4
 }]

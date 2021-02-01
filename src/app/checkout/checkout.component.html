@@ -1,0 +1,36 @@
+     <!-- link to the SqPaymentForm library -->
+
+   <!-- link to the local SqPaymentForm initialization -->
+
+   <div class="row no-gutters create-account">
+    <div class="col-3"></div>
+    <div class="col-6 card-box" id="card_1">  
+      <div class="middle"> 
+      <div id="sq-ccbox">
+      <h2>Payment Information</h2>
+
+      <form id="nonce-form" novalidate  method="post">
+     
+
+        <h2>Pay with a Credit Card</h2>
+        <label for="sq-card-number">Card Number:</label>
+        <div id="sq-card-number"></div>
+        <label for="sq-cvv">CVV:</label>
+        <div id="sq-cvv"></div>
+        <label for="sq-expiration-date">Expiration Date:</label>
+        <div id="sq-expiration-date"></div>
+        <label for="sq-postal-code">Postal Code:</label>
+        <div id="sq-postal-code"></div>
+
+        <button id="sq-creditcard" class="btn-main button-credit-card" (click)="this.requestCardNonce($event)">Pay with card</button>
+      
+        <input type="hidden" id="sq-id" name="sq-id">
+        <input type="hidden" id="card-nonce" name="nonce">
+
+
+      </form>
+    </div>
+    </div>
+
+  </div>
+</div>

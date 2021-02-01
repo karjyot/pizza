@@ -1,9 +1,129 @@
 [{
-    "name":"14 inch"
+    "name":"14 inch",
+    "price":21,
+    "limit":3,
+    "toppings":[{
+        "name":"Homemade italian sau",
+        "price":5
+    },{
+        "name":"Chopped Green Pepper",
+        "price":5
+    },{
+        "name":"Chopped Red Pepper",
+        "price":4
+    },{
+        "name":"Spinach",
+        "price":4
+    },{
+        "name":"Mushrooms",
+        "price":4
+    },{
+        "name":"Red Onions",
+        "price":4
+    },{
+        "name":"Sliced Tomatoes",
+        "price":4
+    },{
+        "name":"Black Olives",
+        "price":4
+    },{
+        "name":"Extra Cheese",
+        "price":4
+    }]
 },{
-    "name":"12 inch"
+    "name":"12 inch",
+    "price":17,
+    "limit":2,
+    "toppings":[{
+        "name":"Homemade italian sau",
+        "price":4
+    },{
+        "name":"Chopped Green Pepper",
+        "price":4
+    },{
+        "name":"Chopped Red Pepper",
+        "price":3
+    },{
+        "name":"Spinach",
+        "price":3
+    },{
+        "name":"Mushrooms",
+        "price":3
+    },{
+        "name":"Red Onions",
+        "price":3
+    },{
+        "name":"Sliced Tomatoes",
+        "price":3
+    },{
+        "name":"Black Olives",
+        "price":3
+    },{
+        "name":"Extra Cheese",
+        "price":3
+    }]
 },{
-    "name":"9 inch"
+    "name":"9 inch",
+    "price":12,
+    "limit":2,
+    "toppings":[{
+        "name":"Homemade italian sau",
+        "price":3
+    },{
+        "name":"Chopped Green Pepper",
+        "price":3
+    },{
+        "name":"Chopped Red Pepper",
+        "price":2
+    },{
+        "name":"Spinach",
+        "price":2
+    },{
+        "name":"Mushrooms",
+        "price":4
+    },{
+        "name":"Red Onions",
+        "price":2
+    },{
+        "name":"Sliced Tomatoes",
+        "price":2
+    },{
+        "name":"Black Olives",
+        "price":2
+    },{
+        "name":"Extra Cheese",
+        "price":2
+    }]
 },{
-    "name":"4 inch"
+    "name":"6 inch",
+    "price":18,
+    "limit":1,
+    "toppings":[{
+        "name":"Homemade italian sau",
+        "price":2
+    },{
+        "name":"Chopped Green Pepper",
+        "price":2
+    },{
+        "name":"Chopped Red Pepper",
+        "price":1
+    },{
+        "name":"Spinach",
+        "price":1
+    },{
+        "name":"Mushrooms",
+        "price":2
+    },{
+        "name":"Red Onions",
+        "price":1
+    },{
+        "name":"Sliced Tomatoes",
+        "price":1
+    },{
+        "name":"Black Olives",
+        "price":1
+    },{
+        "name":"Extra Cheese",
+        "price":1
+    }]
 }]

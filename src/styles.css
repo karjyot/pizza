@@ -251,3 +251,108 @@ a:hover{
 .list-group-item{
     border: 0px !important
 }
+.block{
+    display: block
+}
+.none{
+    display: none;
+}
+.disable{
+    pointer-events: none;
+    background: #80808080 !important;
+}
+.toppings_container {
+    width: 500px;
+    padding: 20px 0px 0px;
+    margin-left: 20px;
+}
+
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  #sq-ccbox {
+    float:left;
+    margin:5px;
+    padding:10px;
+    vertical-align: top;
+    font-weight: bold;
+  }
+  
+  #nonce-form {
+    padding: 25px;
+    text-align: right;
+  }
+  
+  .sq-input {
+    display: inline-block;
+    border: 1px solid #E0E2E3;
+    border-radius: 4px;
+  }
+  
+  .sq-input--focus {
+    border: 1px solid #4A90E2;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.10), 0 2px 2px 0 rgba(0,0,0,0.10);
+  }
+  
+  .sq-input--error {
+    border: 1px solid red;
+  }
+  
+  .label {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    padding-right: 16px;
+  }
+  
+  .button-credit-card {
+    display: block;
+    width: 100%;
+    height: 56px;
+    padding: 15px;
+    margin-top: 10px;
+    background: #0EB00E;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.10), 0 2px 2px 0 rgba(0,0,0,0.10);
+    border-radius: 4px;
+    cursor:pointer;
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    outline: none;
+  }
+  button.btn.btn-primary.btn-red{
+      background-color: #ff0000;border-color:  #ff0000;
+  }
+  .cart-btns button:nth-child(1){
+      margin-right: 10px;
+  }
+  .cart-message-container{
+        width:400px;
+        margin:0 auto;
+        border:2px solid #ddd;
+        background-color: #f4f4f4;
+        min-height: 400px;
+        padding:30px;
+        display: flex;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        position: absolute;
+        }
+  .cart-message{
+      justify-content: center;
+      align-self: center;
+  }
+  .cart-message p{
+      font-size: 18px;
+  }
+  .current-price{
+    float: right;
+    margin-right: 45px;
+    color:green;
+  }
