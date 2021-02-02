@@ -9,18 +9,26 @@ import { Router,ActivatedRoute } from "@angular/router";
 })
 export class CartComponent implements OnInit {
   cartItems:any
+  coupanError:any
   subTotal:any
+  coupanCode:any
   finalPrice:any
   taxes:any
   totalCount:any
   selectedItem:any
   modalRef:any
+  coupanResponse:any
+  coupanApplied = false
+  pizzaProducts:any
+  freeProduct:any
+  isFreePizza = false
+  selectedFreePizza:any
   qty:any = []
   constructor(
     private pizzaService : PizzaService,
     private modalService: NgbModal,
     private router : Router
-  ) { }
+  ) {this.freeProduct = "" }
 
   ngOnInit() {
   this.getCartItems();
@@ -30,6 +38,7 @@ export class CartComponent implements OnInit {
   getCartItems(){
      
     this.pizzaService.getTaxes().subscribe((result) => {
+      this.coupanResponse = this.pizzaService.getCoupanInfo();
       let taxValue = result.taxRate
       this.cartItems = this.pizzaService.getCartData();
       this.subTotal = this.pizzaService.getTotalPrice(this.cartItems)
@@ -41,7 +50,10 @@ export class CartComponent implements OnInit {
         }
       }
       this.totalCount = this.pizzaService.getTotalCount();
-         
+      if(this.coupanResponse){
+        this.coupanApplied = true
+        this.calculateCoupanPrice(this.coupanResponse)
+      }
     }, (err) => {
        
       });
@@ -68,19 +80,101 @@ export class CartComponent implements OnInit {
     this.pizzaService.quantityChanged(item);
     this.totalCount = this.pizzaService.getTotalCount();
     this.getCartItems();
-   
-   // this.pizzaService.quantityChanged(item);
-    //this.getCartItems();
   }
   addItems(){
     this.router.navigateByUrl('/')
   }
   clearAll(){
     this.pizzaService.emptyCart()
+    this.pizzaService.clearCoupan()
     this.getCartItems();
   }
   checkout(){
-    this.router.navigateByUrl('/checkout')
+    let finalObj = {
+      "totalPrice":this.finalPrice,
+      "totalItems":[]
+    };
+    this.cartItems.forEach(element => {
+      element.name = element.itemName + (element.itemCrust)
+      element.quantity =  element.quantity
+      element.toppings = [];
+      element.itemDescription.forEach(element1 => {
+        element.toppings.push({toppingName:element1.name+"(" +element1.toppingType+")"})
+      })
+      finalObj.totalItems.push({
+        "pizzaName":element.itemName + "(" + element.itemCrust +")",
+        "quantity":element.quantity,
+        "toppings":element.toppings
+      })
+    });
+    if(this.isFreePizza){
+      finalObj['freePizza'] = this.selectedFreePizza
+    }
+    console.log(finalObj)
+    //this.router.navigateByUrl('/checkout')
+  }
+
+  applyCoupan(){
+
+    if(!this.coupanCode){
+      return;
+    }
+    this.coupanError = "";
+    this.pizzaService.validateCoupan(this.coupanCode).subscribe(response => {
+      if(response){
+        this.coupanResponse = response;
+       this.pizzaService.saveCoupanInfo( this.coupanResponse)
+        this.coupanApplied = true
+        this.calculateCoupanPrice(response)
+      }else{
+        this.coupanApplied = false
+        this.coupanError = "Coupan code is invalid."
+      }
+      
+      })
+    
+  }
+  calculateCoupanPrice(response){
+
+    let currentDate =  new Date().getTime() / 1000;
+    let startDate = response.start_date.seconds;
+    let endDate = response.end_date.seconds;
+
+    if(currentDate<=endDate && currentDate>= startDate){
+     
+      if(response.type == 'percentage'){
+        this.finalPrice =  (this.finalPrice) - (this.finalPrice * response.value)/100
+      }
+      else if(response.type == 'amount'){
+        this.finalPrice =  (this.finalPrice) - (response.value)
+      }
+      else{
+        this.pizzaService.getListofProducts().subscribe(response => {
+          this.pizzaProducts = response
+         
+        })
+      }
+    }else{
+      this.coupanApplied = false
+      this.coupanError = "Coupan code expired."
+    }
+    
+  }
+  applyFreeItem(){
+    if(!this.freeProduct){
+      return
+    }
+  this.isFreePizza = true
+  this.selectedFreePizza =  this.pizzaProducts.filter((item) => item.id == this.freeProduct)[0];
+  }
+  changeFreePizza(){
+    this.isFreePizza = false
+  }
+  cancelCoupan(){
+    this.coupanApplied = false
+    this.isFreePizza = false
+    this.pizzaService.clearCoupan()
+    this.getCartItems();
   }
 
 

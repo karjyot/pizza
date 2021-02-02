@@ -356,3 +356,21 @@ a:hover{
     margin-right: 45px;
     color:green;
   }
+  .promo {
+    display: flex;
+    justify-content: space-between;
+ 
+    align-items: center;
+   
+    margin-top: 20px;
+}
+.promo-top{
+    flex: 2 1 0;
+    margin-right: 20px;
+
+}
+.promo_applied{
+    display: flex;
+    margin-top: 35px;
+    margin-bottom: 20px;
+}

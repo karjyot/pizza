@@ -11,6 +11,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { environment } from '../environments/environment';
+
+import { AngularFirestore } from '@angular/fire/firestore';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,9 +27,10 @@ import { environment } from '../environments/environment';
     FormsModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireFunctionsModule
+    AngularFireFunctionsModule,
+    
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

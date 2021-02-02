@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { map,tap } from 'rxjs/operators';
  //const functions = require('firebase-functions');
  //import { Client, Environment } from 'square'
  //const crypto = require('crypto');
@@ -12,7 +14,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 export class PizzaService {
   cartItems:any = []
   client:any
-  constructor(private http: HttpClient,private fns: AngularFireFunctions) { 
+  constructor(private http: HttpClient,private fns: AngularFireFunctions,private firestore: AngularFirestore) { 
    
   }
 
@@ -109,6 +111,39 @@ export class PizzaService {
             count += Number(item.quantity);
     }
     return count;
+}
+
+validateCoupan(code){
+  return this.firestore.collection<any>('coupans', ref => ref.where('code', '==', code))
+  .valueChanges()
+  .pipe(map(val => val.length > 0 ? val[0] : null));
+
+ 
+}
+getListofProducts(){
+   let query =  this.firestore.collection('products');
+  return query.get()
+    .pipe(
+        map(snapshot => {
+            let items = [];
+            snapshot.docs.map(a => {
+                const data = a.data();
+                const id = a.id;
+                items.push({ id, ...data })
+            })
+            return items
+        }),)
+}
+saveCoupanInfo(coupanInfo){
+  localStorage.setItem('coupan-details',  JSON.stringify(coupanInfo));
+}
+getCoupanInfo(){
+  let details = localStorage.getItem('coupan-details');
+  return JSON.parse(details);
+}
+clearCoupan(){
+  let emptyArr:any = []
+  localStorage.removeItem('coupan-details');
 }
 
   createPayment(){

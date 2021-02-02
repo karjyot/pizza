@@ -5,12 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    authDomain: "http://localhost",
-    databaseURL: "https://xxxxxxxxxxxxxx.firebaseio.com",
-    projectId: "xxxxxxxxxxxx-8e0a7",
-    storageBucket: "xxxxxxxxxxxxxxxxx",
-    messagingSenderId: "xxxxxxxxxxxxxx"
+    apiKey: "AIzaSyDtKRuzjtkvN7Wjn6gvfDELRE9m7EG0sTs",
+    authDomain: "mypizza-c21cf.firebaseapp.com",
+    projectId: "mypizza-c21cf",
+    storageBucket: "mypizza-c21cf.appspot.com",
+    messagingSenderId: "1086300892861",
+    appId: "1:1086300892861:web:e3afdb50d6441b732d91d4",
+    measurementId: "G-FVGQ5CHB5G"
     }
 };
 
