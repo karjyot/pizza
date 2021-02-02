@@ -30,10 +30,10 @@ export class PizzaComponent implements OnInit {
   getPizzaData(){
     forkJoin([
       this.pizzaService.getPizzaSizes().pipe(map((res) => res), catchError(e => of([]))),
-      this.pizzaService.getCrustTpes().pipe(map((res) => res), catchError(e => of([]))),
+      // this.pizzaService.getCrustTpes().pipe(map((res) => res), catchError(e => of([]))),
       ]).subscribe(response => {
       this.pizzaSizes = response[0];
-      this.pizzaCrusts = response[1];
+      //this.pizzaCrusts = response[1];
      // this.pizzaToppings = response[2];
      
       })
@@ -122,9 +122,11 @@ findPizzaID(){
 }
 
 /*==Filter toppings based on selected size==*/
-getToppings(){
+getToppingsAndCrust(){
   let toppings =  this.pizzaSizes.filter((item) => item.name == this.pizzaModel.selectedSize);
   this.pizzaToppings  = toppings[0].toppings;
+  this.pizzaCrusts  = toppings[0].crust;
+ 
   for(var i=0; i< this.pizzaToppings.length; i++){
     this.pizzaToppings[i].toppingType = 'FULL';
     this.pizzaToppings[i].checked = false
@@ -132,12 +134,17 @@ getToppings(){
 
 }
 
+
 /*==Find total price of selected items==*/
 runningTotalPrice(){
   let pizzaSize =  this.pizzaSizes.filter((item) => item.name == this.pizzaModel.selectedSize)[0];
-  let crust =  this.pizzaCrusts.filter((item) => item.name == this.pizzaModel.selectedCrust)[0];
+  let crustPrice = 0
   let toppingPrice = 0;
-  let setTopping = 0
+  let setTopping = 0;
+  if(this.pizzaCrusts && this.pizzaModel.selectedCrust){
+
+    crustPrice = this.pizzaCrusts.filter((item) => item.name == this.pizzaModel.selectedCrust)[0].price;
+  }
   if(this.pizzaToppings){
     let selectedToppings =  this.pizzaToppings.filter((item) => item.checked == true);
    
@@ -154,7 +161,7 @@ runningTotalPrice(){
   }
 
   
-  let total  = Number(pizzaSize?pizzaSize.price:0) + Number(crust?crust.price:0) + Number(toppingPrice)
+  let total  = Number(pizzaSize?pizzaSize.price:0) + Number(crustPrice) + Number(toppingPrice)
   this.currentPrice = total
 
 }

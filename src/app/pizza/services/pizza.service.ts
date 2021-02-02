@@ -101,6 +101,15 @@ export class PizzaService {
     let emptyArr:any = []
     localStorage.setItem('cartItems', JSON.stringify(emptyArr) );
   }
+  getTotalCount() {
+    let cartItems = this.getCartData();
+    var count = 0;
+    for (var i = 0; i < cartItems.length; i++) {
+        var item = cartItems[i];
+            count += Number(item.quantity);
+    }
+    return count;
+}
 
   createPayment(){
   //   const callable = this.fns.httpsCallable('my-fn-name');

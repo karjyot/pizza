@@ -12,6 +12,7 @@ export class CartComponent implements OnInit {
   subTotal:any
   finalPrice:any
   taxes:any
+  totalCount:any
   selectedItem:any
   modalRef:any
   qty:any = []
@@ -39,7 +40,7 @@ export class CartComponent implements OnInit {
           this.qty[i] = this.cartItems[i].quantity
         }
       }
-     
+      this.totalCount = this.pizzaService.getTotalCount();
          
     }, (err) => {
        
@@ -51,18 +52,21 @@ export class CartComponent implements OnInit {
   }
   removePizza(){
     this.pizzaService.clearCart(this.selectedItem);
+    this.totalCount = this.pizzaService.getTotalCount();
     this.modalRef.close();
     this.getCartItems();
   }
 
   changeItemCount(item){
  
-    this.pizzaService.saveCartData(item)
-    this.getCartItems()
+    this.pizzaService.saveCartData(item);
+    this.totalCount = this.pizzaService.getTotalCount();
+    this.getCartItems();
   }
   removeItem(item){
 
     this.pizzaService.quantityChanged(item);
+    this.totalCount = this.pizzaService.getTotalCount();
     this.getCartItems();
    
    // this.pizzaService.quantityChanged(item);

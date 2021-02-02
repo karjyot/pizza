@@ -2,6 +2,16 @@
     "name":"14 inch",
     "price":21,
     "limit":3,
+    "crust":[{
+        "name":"Orignal",
+        "price":0
+    },{
+        "name":"Gluten Free",
+        "price":5
+    },{
+        "name":"Vegan",
+        "price":5
+    }],
     "toppings":[{
         "name":"Homemade italian sau",
         "price":5
@@ -34,6 +44,16 @@
     "name":"12 inch",
     "price":17,
     "limit":2,
+    "crust":[{
+        "name":"Orignal",
+        "price":0
+    },{
+        "name":"Gluten Free",
+        "price":4
+    },{
+        "name":"Vegan",
+        "price":4
+    }],
     "toppings":[{
         "name":"Homemade italian sau",
         "price":4
@@ -66,6 +86,16 @@
     "name":"9 inch",
     "price":12,
     "limit":2,
+    "crust":[{
+        "name":"Orignal",
+        "price":0
+    },{
+        "name":"Gluten Free",
+        "price":4
+    },{
+        "name":"Vegan",
+        "price":4
+    }],
     "toppings":[{
         "name":"Homemade italian sau",
         "price":3
@@ -98,6 +128,16 @@
     "name":"6 inch",
     "price":18,
     "limit":1,
+    "crust":[{
+        "name":"Orignal",
+        "price":0
+    },{
+        "name":"Gluten Free",
+        "price":4
+    },{
+        "name":"Vegan",
+        "price":4
+    }],
     "toppings":[{
         "name":"Homemade italian sau",
         "price":2

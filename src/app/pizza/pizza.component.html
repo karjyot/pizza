@@ -17,7 +17,7 @@
                                 <h1 class="pizzaHeading">Select Size</h1>
                                    <li class="list-group-item" *ngFor="let sizes of pizzaSizes;">
                                        <label class="checkboxRadio">
-                                           <input name="g1" type="radio" value="{{sizes.name}}" [(ngModel)]="pizzaModel.selectedSize" (change)="isNextButtonDisabled();getToppings()" />
+                                           <input name="g1" type="radio" value="{{sizes.name}}" [(ngModel)]="pizzaModel.selectedSize" (change)="isNextButtonDisabled();getToppingsAndCrust()" />
                                            <span class="primary"></span>
                                        </label>
                                        {{sizes.name}}
@@ -27,7 +27,7 @@
                                 <h1 class="pizzaHeading">Select Crust</h1>
                                 <li class="list-group-item" *ngFor="let crusts of pizzaCrusts;">
                                     <label class="checkboxRadio">
-                                        <input name="g2" type="radio"  value="{{crusts.name}}"  [(ngModel)]="pizzaModel.selectedCrust" (change)="isNextButtonDisabled()" />
+                                        <input name="g2" type="radio"  value="{{crusts.name}}"  [(ngModel)]="pizzaModel.selectedCrust" (change)="isNextButtonDisabled();" />
                                         <span class="primary"></span>
                                     </label>
                                     {{crusts.name}}
