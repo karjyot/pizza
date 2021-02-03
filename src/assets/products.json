@@ -1,0 +1,62 @@
+[
+    {
+        "productId": "1001",  
+        "itemName": "9\" Delicious Deep Dish Chicago-Style Cheese Pizza",
+        "itemShortDescription": "We start with a better buttered cornmeal crust, followed by layers premium Wisconsin mozzarella cheese",
+        "itemFullDescription": "Delicious Deep Dish Chicago-Style Cheese Pizza. Handmade, then frozen to lock in freshness and flavor. We start with a better buttered cornmeal crust, followed by layers premium Wisconsin mozzarella cheese, and topped with our small batch sweet and savory crushed tomato sauce with freshly grated parmesan cheese. Enjoy the rich flavors of your Red Star Pizzas, conveniently cooked at your home and ready in minutes.",
+        "itemImageUrl": "../../assets/images/cheeselid.png", 
+        "itemPrice": 12.00,
+        "itemNutritionImageUrl": "../../assets/images/cheesenutrition.png",
+        "itemPreparationInstructions": "Preheat Oven at 425. Remove your Red Star Pizza from the pan and discard the lid. Wipe away any moisture on pan then lightly oil the pan.  Cook Frozen for 30-35 Minutes until Crust is Golden Brown.",
+        "itemIngredients": "Sauce (curushed tomato, Extra Virgin Olive Oil, Dry Oregano, Grated Parmesan Cheese, Fresh Garlic, Fresh Basil, Berry Preserves, Chicken Base), Low Moisture Part Skim Mozzarella Cheese, All Purpose Unbleached Flower, Yellow Cornmeal, Organic Unsalted Butter, Extra Virgin Olive Oil, Granulated Garlic, Salt Sugar, Active Dry Yeast.",
+        "itemFoodAlergens": "Milk, Wheat"
+    },
+    {
+        "productId": "1002",  
+        "itemName": "9\" Delicious Deep Dish Chicago-Style Sausage Pizza",
+        "itemShortDescription": "a whole lot of love goes into our homemade lean pork sausage: tosted fennel, toasted anise, toasted peppercorns, fresh parsely, fresh diced garlic",
+        "itemFullDescription": "Delicious Deep Dish Chicago-Style Sausage Pizza. Handmade, then frozen to lock in freshness and flavor. We start with a better buttered cornmeal crust, followed by layers premium Wisconsin mozzarella cheese, then lean homemade Italian sausage with toasted fennel seeds, toasted fresh peppercorns, toasted anise, fresh parsley, fresh garlic;  then topped with our small batch sweet and savory crushed tomato sauce with freshly grated parmesan cheese.Enjoy the rich flavors of your Red Star Pizzas, conveniently cooked at your home and ready in minutes.",
+        "itemImageUrl": "../../assets/images/sausagelid.png", 
+        "itemPrice": 15.00,
+        "itemNutritionImageUrl": "../../assets/images/sausagenutrition.png",
+        "itemPreparationInstructions": "Preheat Oven at 425. Remove your Red Star Pizza from the pan and discard the lid. Wipe away any moisture on pan then lightly oil the pan.  Cook Frozen for 30-35 Minutes until Crust is Golden Brown.",
+        "itemIngredients": "Sauce (curushed tomato, Extra Virgin Olive Oil, Dry Oregano, Grated Parmesan Cheese, Fresh Garlic, Fresh Basil, Berry Preserves, Chicken Base), Low Moisture Part Skim Mozzarella Cheese, All Purpose Unbleached Flower, Yellow Cornmeal, Organic Unsalted Butter, Extra Virgin Olive Oil, Granulated Garlic, Salt Sugar, Active Dry Yeast, Sausage Topping (Pork, Crushed Red Pepper, Anise Seeds, Fennel Seeds, Onion Powder, Black Pepper, Paprika, Parsley Flakes, Granulated Garlic, Fresh Parsley, Fresh Garlic).",
+        "itemFoodAlergens": "Milk, Wheat"
+    },
+    {
+        "productId": "1003",  
+        "itemName": "9\" Delicious Deep Dish Chicago-Style Pepperoni Pizza",
+        "itemShortDescription": "Chopped Chunks of Artisan Pepperoni melt into the Wisconsin mozzarella cheese",
+        "itemFullDescription": "Delicious Deep Dish Chicago-Style Pepperoni Pizza. Handmade, then frozen to lock in freshness and flavor. We start with a better buttered cornmeal crust, followed by layers premium Wisconsin mozzarella cheese, then chopped chunks of pepperoni; then topped with our small batch sweet and savory crushed tomato sauce with freshly grated parmesan cheese.Enjoy the rich flavors of your Red Star Pizzas, conveniently cooked at your home and ready in minutes.",
+        "itemImageUrl": "../../assets/images/pepperoniLid.png", 
+        "itemPrice": 15.00,
+        "itemNutritionImageUrl": "../../assets/images/pepperoninutrition.png",
+        "itemPreparationInstructions": "Preheat Oven at 425. Remove your Red Star Pizza from the pan and discard the lid. Wipe away any moisture on pan then lightly oil the pan.  Cook Frozen for 30-35 Minutes until Crust is Golden Brown.",
+        "itemIngredients": "Sauce (curushed tomato, Extra Virgin Olive Oil, Dry Oregano, Grated Parmesan Cheese, Fresh Garlic, Fresh Basil, Berry Preserves, Chicken Base), Low Moisture Part Skim Mozzarella Cheese, All Purpose Unbleached Flower, Yellow Cornmeal, Organic Unsalted Butter, Extra Virgin Olive Oil, Granulated Garlic, Salt Sugar, Active Dry Yeast, Pepperoni Topping (Pork, Salt, Contains Less Than 2% of the Following: Dextrose, Natural Flavoring, Natural Smoke Flavor, Wine, Oleoresin of Paprika, Paprika, Garlic, Lactic Acid Starter Culture, Sodium Ascrbate, Sodium Nitrite)",
+        "itemFoodAlergens": "Milk, Wheat"
+    },
+    {
+        "productId": "1004",  
+        "itemName": "4\" Delicious Deep Dish Chicago-Style Mini Cheese Pizza",
+        "itemShortDescription": "Super cute and super convenient; these baby versions of our flagship delicious deep dish pizzas are ready in minutes",
+        "itemFullDescription": "Delicious Deep Dish Chicago-Style Cheese Pizza. Handmade, then frozen to lock in freshness and flavor. We start with a better buttered cornmeal crust, followed by layers premium Wisconsin mozzarella cheese, and topped with our small batch sweet and savory crushed tomato sauce with freshly grated parmesan cheese.Enjoy the rich flavors of your Red Star Pizzas, conveniently cooked at your home and ready in minutes.",
+        "itemImageUrl": "../../assets/images/miniLid.png", 
+        "itemPrice": 18.00,
+        "itemNutritionImageUrl": "../../assets/images/mininutrition.png",
+        "itemPreparationInstructions": "Preheat oven to 425 and cook frozen in pan for 7-12 minutes until crust is Golden Brown.",        
+        "itemIngredients": "Sauce (curushed tomato, Extra Virgin Olive Oil, Dry Oregano, Grated Parmesan Cheese, Fresh Garlic, Fresh Basil, Berry Preserves, Chicken Base), Low Moisture Part Skim Mozzarella Cheese, All Purpose Unbleached Flower, Yellow Cornmeal, Organic Unsalted Butter, Extra Virgin Olive Oil, Granulated Garlic, Salt Sugar, Active Dry Yeast.",
+        "itemFoodAlergens": "Milk, Wheat"
+    },
+    {
+        "productId": "9999",  
+        "itemName": "Custom Pizza",
+        "itemShortDescription": "Super cute and super convenient; these baby versions of our flagship delicious deep dish pizzas are ready in minutes",
+        "itemFullDescription": "Delicious Deep Dish Chicago-Style Cheese Pizza. Handmade, then frozen to lock in freshness and flavor. We start with a better buttered cornmeal crust, followed by layers premium Wisconsin mozzarella cheese, and topped with our small batch sweet and savory crushed tomato sauce with freshly grated parmesan cheese.Enjoy the rich flavors of your Red Star Pizzas, conveniently cooked at your home and ready in minutes.",
+        "itemImageUrl": "../../assets/images/miniLid.png", 
+        "itemPrice": 18.00,
+        "itemNutritionImageUrl": "../../assets/images/mininutrition.png",
+        "itemPreparationInstructions": "Preheat oven to 425 and cook frozen in pan for 7-12 minutes until crust is Golden Brown.",        
+        "itemIngredients": "Sauce (curushed tomato, Extra Virgin Olive Oil, Dry Oregano, Grated Parmesan Cheese, Fresh Garlic, Fresh Basil, Berry Preserves, Chicken Base), Low Moisture Part Skim Mozzarella Cheese, All Purpose Unbleached Flower, Yellow Cornmeal, Organic Unsalted Butter, Extra Virgin Olive Oil, Granulated Garlic, Salt Sugar, Active Dry Yeast.",
+        "itemFoodAlergens": "Milk, Wheat"
+    }
+]

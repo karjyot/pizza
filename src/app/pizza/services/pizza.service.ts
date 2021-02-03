@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map,tap } from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
  //const functions = require('firebase-functions');
  //import { Client, Environment } from 'square'
  //const crypto = require('crypto');
@@ -121,18 +122,26 @@ validateCoupan(code){
  
 }
 getListofProducts(){
-   let query =  this.firestore.collection('products');
-  return query.get()
-    .pipe(
-        map(snapshot => {
-            let items = [];
-            snapshot.docs.map(a => {
-                const data = a.data();
-                const id = a.id;
-                items.push({ id, ...data })
-            })
-            return items
-        }),)
+  return this.http.get('./assets/products.json');
+  //  let query =  this.firestore.collection('products');
+  // return query.get()
+  //   .pipe(
+  //       map(snapshot => {
+  //           let items = [];
+  //           snapshot.docs.map(a => {
+  //               const data = a.data();
+  //               const id = a.id;
+  //               items.push({ id, ...data })
+  //           })
+  //           return items
+  //       }),)
+}
+setProductDetails(product){
+  localStorage.setItem('product-details',  JSON.stringify(product));
+}
+getProductDetails(){
+  let details = localStorage.getItem('product-details');
+  return JSON.parse(details);
 }
 saveCoupanInfo(coupanInfo){
   localStorage.setItem('coupan-details',  JSON.stringify(coupanInfo));

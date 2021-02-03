@@ -1,0 +1,27 @@
+<div class="container-fluid padding">
+    <div class="row welcome text-center">
+        <div class="col-12">
+            <h1 class="display-4">Delicious Deep Dish Chicago-Style Pizzas</h1>
+        </div>
+        <hr>
+        <div class="col-12">
+            <p class="lead">At <strong>Red Star Pizzas,</strong> we use only the best tasting, highest quality ingredients. All <strong>Red Star Pizzas</strong> are hand made, then frozen to lock in freshness and flavor.</p>
+        </div>
+    </div>
+</div> 
+<div class="container text-center my-3">
+    <div class="row mx-auto my-auto">
+      <div class="col-md-4" *ngFor="let product of products">
+        <div class="card card-body">
+              <img class="img-fluid" src={{product.itemImageUrl}} alt={{product.itemName}}>
+              <p class="card-text">{{product.itemShortDescription}}</p>
+              <a (click)="addToCart(product)" class="btn btn-primary" *ngIf="product.productId != '9999'">Add to Cart</a>
+              <a (click)="customize(product)" class="btn btn-primary" *ngIf="product.productId == '9999'">Customize</a>
+              <a (click)="detailClick(product)" class="btn btn-primary">Details</a>
+        </div>
+      </div>
+
+      
+
+    </div>
+</div>

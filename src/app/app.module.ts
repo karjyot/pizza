@@ -13,12 +13,16 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { environment } from '../environments/environment';
 
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ProductsComponent } from './products/products.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 @NgModule({
   declarations: [
     AppComponent,
     PizzaComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ProductsComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

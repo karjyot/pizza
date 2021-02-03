@@ -41,6 +41,7 @@ export class CartComponent implements OnInit {
       this.coupanResponse = this.pizzaService.getCoupanInfo();
       let taxValue = result.taxRate
       this.cartItems = this.pizzaService.getCartData();
+      console.log(this.cartItems[0])
       this.subTotal = this.pizzaService.getTotalPrice(this.cartItems)
       this.taxes = (this.subTotal * taxValue/100)
       this.finalPrice =  this.subTotal + this.taxes;
