@@ -105,14 +105,15 @@ export class CartComponent implements OnInit {
       finalObj.totalItems.push({
         "pizzaName":element.itemName + "(" + element.itemCrust +")",
         "quantity":element.quantity,
-        "toppings":element.toppings
+        "toppings":element.toppings,
+        "productDescription":element.productDescription
       })
     });
     if(this.isFreePizza){
       finalObj['freePizza'] = this.selectedFreePizza
     }
-    console.log(finalObj)
-    //this.router.navigateByUrl('/checkout')
+    this.pizzaService.saveOrderDetails(finalObj)
+    this.router.navigateByUrl('/checkout')
   }
 
   applyCoupan(){
@@ -166,7 +167,7 @@ export class CartComponent implements OnInit {
       return
     }
   this.isFreePizza = true
-  this.selectedFreePizza =  this.pizzaProducts.filter((item) => item.id == this.freeProduct)[0];
+  this.selectedFreePizza =  this.pizzaProducts.filter((item) => item.productId == this.freeProduct)[0];
   }
   changeFreePizza(){
     this.isFreePizza = false

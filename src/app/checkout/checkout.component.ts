@@ -1,10 +1,11 @@
 
 
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {AfterViewInit, Component, OnInit, NgModule} from '@angular/core';
 import { PizzaService } from './../pizza/services/pizza.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 declare var SqPaymentForm : any; //magic to allow us to access the SquarePaymentForm lib
-
+import { Router,ActivatedRoute } from "@angular/router";
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -16,11 +17,53 @@ export class CheckoutComponent implements OnInit{
 
   constructor(
     private pizzaService : PizzaService,
+    private firestore: AngularFirestore,   
+    private router: Router,
+     private modalService: NgbModal,
   ){}
   isFormLoaded : any
   paymentForm; //this is our payment form object
-
+  cartItems:any
+  popRef:any
+  orderId:any
+  coupanError:any
+  subTotal:any
+  coupanCode:any
+  finalPrice:any
+  taxes:any
+  totalCount:any
+  selectedItem:any
+  modalRef:any
+  coupanResponse:any
+  coupanApplied = false
+  pizzaProducts:any
+  freeProduct:any
+  isFreePizza = false
+  selectedFreePizza:any
+  qty:any = []
   ngOnInit(){
+    this.pizzaService.getTaxes().subscribe((result) => {
+      this.coupanResponse = this.pizzaService.getCoupanInfo();
+      let taxValue = result.taxRate
+      this.cartItems = this.pizzaService.getCartData();
+
+      this.subTotal = this.pizzaService.getTotalPrice(this.cartItems)
+      this.taxes = (this.subTotal * taxValue/100)
+      this.finalPrice =  this.subTotal + this.taxes;
+      if(this.cartItems){
+        for(var i=0; i<this.cartItems.length; i++){
+          this.qty[i] = this.cartItems[i].quantity
+        }
+      }
+      this.totalCount = this.pizzaService.getTotalCount();
+      if(this.coupanResponse){
+        this.coupanApplied = true
+        this.calculateCoupanPrice(this.coupanResponse)
+      }
+    }, (err) => {
+       
+      });
+
     // Set the application ID
     var applicationId = "sandbox-sq0idb-aZ5h03luwaRATKAuRQq1YA";
     this.paymentForm = new SqPaymentForm({
@@ -32,12 +75,11 @@ export class CheckoutComponent implements OnInit{
   
     // Customize the CSS for SqPaymentForm iframe elements
    inputStyles: [{
-        fontSize: '18px',
-        fontFamily: 'Helvetica Neue',
-        padding: '15px',
-        color: '#373F4A',
-        lineHeight: '24px',
-        placeholderColor: '#BDBFBF'
+      fontSize: '16px',
+      lineHeight: '24px',
+      padding: '16px',
+      placeholderColor: '#a0a0a0',
+      backgroundColor: 'transparent',
       }],
   
   
@@ -138,9 +180,11 @@ export class CheckoutComponent implements OnInit{
           });
   
           return;
+        }else{
+          this.orderPlaced();
         }
-  
-        alert('Nonce received: ' + nonce); /* FOR TESTING ONLY */
+     
+        //alert('Nonce received: ' + nonce); /* FOR TESTING ONLY */
   
         // Assign the nonce value to the hidden form field
         // document.getElementById('card-nonce').value = nonce;
@@ -202,17 +246,61 @@ export class CheckoutComponent implements OnInit{
   this.paymentForm.build();
  
 }
-requestCardNonce(event) {
-
+requestCardNonce(event,popRef) {
+this.popRef = popRef
   // Don't submit the form until SqPaymentForm returns with a nonce
   event.preventDefault();
-
+//  this.orderPlaced(popRef)
   // Request a nonce from the SqPaymentForm object
   this.paymentForm.requestCardNonce();
   this.pizzaService.createPayment();
 }
-test(){
-  this.pizzaService.createPayment();
+
+
+calculateCoupanPrice(response){
+
+  let currentDate =  new Date().getTime() / 1000;
+  let startDate = response.start_date.seconds;
+  let endDate = response.end_date.seconds;
+
+  if(currentDate<=endDate && currentDate>= startDate){
+   
+    if(response.type == 'percentage'){
+      this.finalPrice =  (this.finalPrice) - (this.finalPrice * response.value)/100
+    }
+    else if(response.type == 'amount'){
+      this.finalPrice =  (this.finalPrice) - (response.value)
+    }
+    else{
+      this.pizzaService.getListofProducts().subscribe(response => {
+        this.pizzaProducts = response
+       
+      })
+    }
+  }else{
+    this.coupanApplied = false
+    this.coupanError = "Coupan code expired."
+  }
+  
 }
+orderPlaced(){
+  let orderData = this.pizzaService.getOrderDetails();
+  let orderDate = new Date().toLocaleString();
+  orderData.order_date = orderDate;
+  try{
+      let fn =  this.firestore.collection('orders').add(orderData).then(docRef => {
+        this.modalRef =  this.modalService.open(this.popRef, {backdropClass: 'light-blue-backdrop'})
+        this.orderId = docRef.id;
+        this.pizzaService.deleteOrderDetails();
+        this.pizzaService.emptyCart();
+        this.pizzaService.deleteCoupan();
+        this.router.navigate(['/custom']);
+       })     
+  }catch(e){
+    console.log(e)
+  }
+ 
+}
+
 
    }

@@ -34,6 +34,7 @@ export class ProductsComponent implements OnInit {
       "id":product.productId,
       "itemName":product.itemName,
       "itemPrice":'',
+      "productDescription":product.itemFullDescription,
       "description":product.itemFullDescription,
       "itemDescription":[],
       "itemCrust":'',

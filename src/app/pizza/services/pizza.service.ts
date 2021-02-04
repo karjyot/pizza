@@ -136,6 +136,8 @@ getListofProducts(){
   //           return items
   //       }),)
 }
+
+
 setProductDetails(product){
   localStorage.setItem('product-details',  JSON.stringify(product));
 }
@@ -150,9 +152,24 @@ getCoupanInfo(){
   let details = localStorage.getItem('coupan-details');
   return JSON.parse(details);
 }
+deleteCoupan(){
+  localStorage.removeItem('coupan-details');
+}
+saveOrderDetails(order){
+  localStorage.setItem('order-details',  JSON.stringify(order));
+}
+
+getOrderDetails(){
+  let details = localStorage.getItem('order-details');
+  return JSON.parse(details);
+}
 clearCoupan(){
   let emptyArr:any = []
   localStorage.removeItem('coupan-details');
+}
+
+deleteOrderDetails(){
+  localStorage.removeItem('order-details');
 }
 
   createPayment(){

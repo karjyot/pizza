@@ -272,7 +272,7 @@ a:hover{
     -moz-osx-font-smoothing: grayscale;
   }
   
-  #sq-ccbox {
+  /* #sq-ccbox {
     float:left;
     margin:5px;
     padding:10px;
@@ -294,12 +294,53 @@ a:hover{
   .sq-input--focus {
     border: 1px solid #4A90E2;
     box-shadow: 0 0 2px 0 rgba(0,0,0,0.10), 0 2px 2px 0 rgba(0,0,0,0.10);
+  } */
+  .third {
+    float: left;
+    width: calc((100% - 32px) / 3);
+    padding: 0;
+    margin: 0 16px 16px 0;
+  }
+  
+  .third:last-of-type {
+    margin-right: 0;
+  }
+  
+  /* Define how SqPaymentForm iframes should look */
+  .sq-input {
+    height: 56px;
+    box-sizing: border-box;
+    border: 1px solid #E0E2E3;
+    background-color: white;
+    border-radius: 6px;
+    display: inline-block;
+    -webkit-transition: border-color .2s ease-in-out;
+       -moz-transition: border-color .2s ease-in-out;
+        -ms-transition: border-color .2s ease-in-out;
+            transition: border-color .2s ease-in-out;
+  }
+  
+  /* Define how SqPaymentForm iframes should look when they have focus */
+  .sq-input--focus {
+    border: 1px solid #4A90E2;
+  }
+  
+  /* Define how SqPaymentForm iframes should look when they contain invalid values */
+ 
+  #sq-card-number {
+    margin-bottom: 16px;
   }
   
   .sq-input--error {
     border: 1px solid red;
   }
-  
+  #form-container {
+    position: relative;
+    /* width: 380px; */
+    margin: 0 auto;
+    /* top: 50%; */
+    
+  }
   .label {
     font-size: 18px;
     font-weight: bold;
@@ -373,4 +414,55 @@ a:hover{
     display: flex;
     margin-top: 35px;
     margin-bottom: 20px;
+}
+.thank-you-pop{
+	width:100%;
+ 	padding:20px;
+	text-align:center;
+}
+.thank-you-pop img{
+	width:76px;
+	height:auto;
+	margin:0 auto;
+	display:block;
+	margin-bottom:25px;
+}
+
+.thank-you-pop h1{
+	font-size: 42px;
+    margin-bottom: 25px;
+	color:#5C5C5C;
+}
+.thank-you-pop p{
+	font-size: 20px;
+    margin-bottom: 27px;
+ 	color:#5C5C5C;
+}
+.thank-you-pop h3.cupon-pop{
+	font-size: 25px;
+    margin-bottom: 40px;
+	color:#222;
+	display:inline-block;
+	text-align:center;
+	padding:10px 20px;
+	border:2px dashed #222;
+	clear:both;
+	font-weight:normal;
+}
+.thank-you-pop h3.cupon-pop span{
+	color:#03A9F4;
+}
+.thank-you-pop a{
+	display: inline-block;
+    margin: 0 auto;
+    padding: 9px 20px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    background-color: #8BC34A;
+    border-radius: 17px;
+}
+.thank-you-pop a i{
+	margin-right:5px;
+	color:#fff;
 }

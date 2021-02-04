@@ -69,6 +69,7 @@ console.log(finalPrice)
    "id":this.findPizzaID(),
    "itemName":this.pizzaModel.selectedSize,
    "itemPrice":'',
+   "productDescription":'custom',
    "itemDescription":selectedToppings,
    "itemCrust":this.pizzaModel.selectedCrust,
    "price":finalPrice,

@@ -138,7 +138,7 @@
          
           <select [(ngModel)]="freeProduct" class = "form-control" required>
             <option value="" selected>Please select</option>
-            <option *ngFor="let pd of pizzaProducts"  value="{{pd.id}}">{{pd.name}}</option>
+            <option *ngFor="let pd of pizzaProducts"  value="{{pd.productId}}">{{pd.itemName}}</option>
           </select>
           <button (click)="applyFreeItem()" class="btn btn-primary mt-3">Submit</button>
         </div>
