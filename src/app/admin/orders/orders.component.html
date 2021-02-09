@@ -1,0 +1,44 @@
+<div id="layoutSidenav">
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">Orders</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Orders</li>
+            </ol>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Orders
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Total price</th>                 
+                                    <th>Date</th>
+                                    <th>View Details</th>
+                                </tr>
+                            </thead>
+                           
+                            <tbody>
+                                <tr *ngFor="let orders of pizzaOrders">
+                                    <td>{{orders.id}}</td>
+                                    <td>${{orders.totalPrice}}</td>
+                                    <td>{{orders.order_date}}</td>
+                                   <td><a href="javasccript:void(0)" >View</a></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</div>
+</div>

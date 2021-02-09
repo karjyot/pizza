@@ -136,6 +136,20 @@ getListofProducts(){
   //           return items
   //       }),)
 }
+getListofLocations(){
+    let query =  this.firestore.collection('locations');
+  return query.get()
+    .pipe(
+        map(snapshot => {
+            let items = [];
+            snapshot.docs.map(a => {
+                const data = a.data();
+                const id = a.id;
+                items.push({ id, ...data })
+            })
+            return items
+        }),)
+}
 
 
 setProductDetails(product){
@@ -171,123 +185,14 @@ clearCoupan(){
 deleteOrderDetails(){
   localStorage.removeItem('order-details');
 }
-
-  createPayment(){
-  //   const callable = this.fns.httpsCallable('my-fn-name');
-  //   console.log(SquareConnect)
-  //  //AngularFireFunctionsModule.call(async (data, context) => {
-  //       /* testing url for sandbox */
-  //       //defaultClient.basePath = process.env.TESTING_SQUARE_CONNECT_URL;
-    
-  //       const defaultClient = SquareConnect.ApiClient.instance;
-  //       defaultClient.basePath = process.env.PRODUCTION_SQUARE_CONNECT_URL;
-  //       const oauth2 = defaultClient.authentications["oauth2"];
-  //       oauth2.accessToken = process.env.PRODUCTION_APPLICATION_ACCESS_TOKEN;
-  //       const idempotency_key = crypto.randomBytes(16).toString("hex");
-  //       const payments_api = new SquareConnect.PaymentsApi() ;
-    
-  //       /* value of ammount is in cents as of 11/29/2019
-  //           , 1 is equal to 1 cent, 100 is equal to 100 cents */
-  //       const request_body = {
-  //           "idempotency_key": idempotency_key,
-  //          // "source_id": data.source_id,
-  //           "amount_money": {
-  //               "amount": 100,
-  //               "currency": "USD"
-  //           },
-  //       };
-    
-  //       try{
-  //         let  response =  payments_api.createPayment(request_body)
-  //           .then( 
-  //               r=> {
-  //                   if(r.ok) { return Promise.resolve(r); }
-  //                   return Promise.reject(Error("TRY ERROR_ON_RESPONSE: " + JSON.stringify(r)))
-  //           })
-  //           .catch( 
-  //               e=> {
-  //                   return Promise.reject(Error("TRY ERROR_ON_EXCEPTION: " + JSON.stringify(e)))
-  //           });
-  //           return "TRY OKAY: " + JSON.stringify(response);
-  //       } catch(error){
-  //           return "CATCH ERROR: " + JSON.stringify(error);
-  //       }
-    //});
-//     const paymentsApi = this.client.paymentsApi;
-//     const bodyAmountMoney = {};
-// bodyAmountMoney["amount"] = 200;
-// bodyAmountMoney["currency"] = 'USD';
-//     const bodyTipMoney = {};
-//     bodyTipMoney["amount"] = 198;
-//     bodyTipMoney["currency"] = 'CHF';
-    
-//     const bodyAppFeeMoney = {};
-//     bodyAppFeeMoney["amount"] = 10;
-//     bodyAppFeeMoney["currency"] = 'USD';
-    
-//     const body = {
-//       sourceId: 'ccof:uIbfJXhXETSP197M3GB',
-//       idempotencyKey: '4935a656-a929-4792-b97c-8848be85c27c',
-//       amountMoney: bodyAmountMoney,
-//     };
-//     body["tipMoney"] = bodyTipMoney;
-//     body["appFeeMoney"] = bodyAppFeeMoney;
-//     body["delayDuration"] = 'delay_duration6';
-//     body["autocomplete"] = true;
-//     body["orderId"] = 'order_id0';
-//     body["customerId"] = 'VDKXEEKPJN48QDG3BGGFAK05P8';
-//     body["locationId"] = 'XK3DBG77NJBFX';
-//     body["referenceId"] = '123456';
-//     body["note"] = 'Brief description';
-//     try {
-//       const { result, ...httpResponse } =  paymentsApi.createPayment(body);
-//       // Get more response info...
-//       // const { statusCode, headers } = httpResponse;
-//     } catch(error) {
-//       if (error) {
-//         const errors = error.result;
-//         console.log(errors)
-//         // const { statusCode, headers } = error;
-//       }
-//     }
-  //   functions.https.onCall(async (data, context) => {
-  //     /* testing url for sandbox */
-  //     //defaultClient.basePath = process.env.TESTING_SQUARE_CONNECT_URL;
-  
-  //     const defaultClient = SquareConnect.ApiClient.instance;
-  //     defaultClient.basePath = process.env.PRODUCTION_SQUARE_CONNECT_URL;
-  //     const oauth2 = defaultClient.authentications["oauth2"];
-  //     oauth2.accessToken = process.env.PRODUCTION_APPLICATION_ACCESS_TOKEN;
-  //     const idempotency_key = crypto.randomBytes(16).toString("hex");
-  //     const payments_api = new SquareConnect.PaymentsApi() ;
-  
-  //     /* value of ammount is in cents as of 11/29/2019
-  //         , 1 is equal to 1 cent, 100 is equal to 100 cents */
-  //     const request_body = {
-  //         "idempotency_key": idempotency_key,
-  //         "source_id": data.source_id,
-  //         "amount_money": {
-  //             "amount": 100,
-  //             "currency": "USD"
-  //         },
-  //     };
-  
-  //     try{
-  //       let  response = await payments_api.createPayment(request_body)
-  //         .then( 
-  //             r=> {
-  //                 if(r.ok) { return Promise.resolve(r); }
-  //                 return Promise.reject(Error("TRY ERROR_ON_RESPONSE: " + JSON.stringify(r)))
-  //         })
-  //         .catch( 
-  //             e=> {
-  //                 return Promise.reject(Error("TRY ERROR_ON_EXCEPTION: " + JSON.stringify(e)))
-  //         });
-  //         return "TRY OKAY: " + JSON.stringify(response);
-  //     } catch(error){
-  //         return "CATCH ERROR: " + JSON.stringify(error);
-  //     }
-  // });
-  }
+createProfile(data) {
+  return new Promise<any>((resolve, reject) =>{
+      this.firestore
+          .collection("profiles")
+          .add(data)
+          .then(res => resolve(res), err => reject(err));
+  });
+}
+ 
   
 }

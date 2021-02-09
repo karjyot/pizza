@@ -6,6 +6,7 @@ import { PizzaService } from './../pizza/services/pizza.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 declare var SqPaymentForm : any; //magic to allow us to access the SquarePaymentForm lib
 import { Router,ActivatedRoute } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -14,12 +15,16 @@ import { Router,ActivatedRoute } from "@angular/router";
 
 
 export class CheckoutComponent implements OnInit{
-
+  addressForm: FormGroup;
+  submitted = false;
+  addressInfo :any
+  pickUpLocation:any
   constructor(
     private pizzaService : PizzaService,
     private firestore: AngularFirestore,   
     private router: Router,
      private modalService: NgbModal,
+     private formBuilder: FormBuilder
   ){}
   isFormLoaded : any
   paymentForm; //this is our payment form object
@@ -40,8 +45,21 @@ export class CheckoutComponent implements OnInit{
   freeProduct:any
   isFreePizza = false
   selectedFreePizza:any
+  address = {selection:'delevery'}
   qty:any = []
   ngOnInit(){
+    this.addressForm = this.formBuilder.group({
+
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      address: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      zip: ['', [Validators.required]],
+      
+  
+  });
+
     this.pizzaService.getTaxes().subscribe((result) => {
       this.coupanResponse = this.pizzaService.getCoupanInfo();
       let taxValue = result.taxRate
@@ -133,7 +151,7 @@ export class CheckoutComponent implements OnInit{
        * callback function: createPaymentRequest
        * Triggered when: a digital wallet payment button is clicked.
        */
-      createPaymentRequest: function () {
+      createPaymentRequest:()=> {
         // The payment request below is provided as
         // guidance. You should add code to create the object
         // programmatically.
@@ -170,31 +188,35 @@ export class CheckoutComponent implements OnInit{
        * callback function: cardNonceResponseReceived
        * Triggered when: SqPaymentForm completes a card nonce request
        */
-      cardNonceResponseReceived: function (errors, nonce, cardData)  {
+      cardNonceResponseReceived(errors, nonce, cardData,callback)  {
+        //return new Promise(function(resolve, reject) {
+          if (errors) {
+            // Log errors from nonce generation to the Javascript console
+            console.log("Encountered errors:");
+            errors.forEach(function(error) {
+              console.log('  ' + error.message);
+            });
+    
+            //reject(errors)
+          }else{
+            console.log(nonce)
+           // resolve(nonce)
+          }
+          //});
+
        
-        if (errors) {
-          // Log errors from nonce generation to the Javascript console
-          console.log("Encountered errors:");
-          errors.forEach(function(error) {
-            console.log('  ' + error.message);
-          });
-  
-          return;
-        }else{
-          this.orderPlaced();
-        }
-     
+       
         //alert('Nonce received: ' + nonce); /* FOR TESTING ONLY */
   
         // Assign the nonce value to the hidden form field
         // document.getElementById('card-nonce').value = nonce;
         //needs to be extracted from the
-        (<HTMLInputElement>document.getElementById('card-nonce')).value = nonce; //casting so .value will work
-        //get this value from the database when the user is logged in
-        (<HTMLInputElement>document.getElementById('sq-id')).value = "CBASEC8F-Phq5_pV7UNi64_kX_4gAQ";
+        // (<HTMLInputElement>document.getElementById('card-nonce')).value = nonce; //casting so .value will work
+        // //get this value from the database when the user is logged in
+        // (<HTMLInputElement>document.getElementById('sq-id')).value = "CBASEC8F-Phq5_pV7UNi64_kX_4gAQ";
   
-        // POST the nonce form to the payment processing page
-        (<HTMLFormElement>document.getElementById('nonce-form')).submit();
+        // // POST the nonce form to the payment processing page
+        // (<HTMLFormElement>document.getElementById('nonce-form')).submit();
   
       },
   
@@ -250,10 +272,13 @@ requestCardNonce(event,popRef) {
 this.popRef = popRef
   // Don't submit the form until SqPaymentForm returns with a nonce
   event.preventDefault();
+  this.paymentForm.requestCardNonce()
 //  this.orderPlaced(popRef)
   // Request a nonce from the SqPaymentForm object
-  this.paymentForm.requestCardNonce();
-  this.pizzaService.createPayment();
+    // this.paymentForm.requestCardNonce().then(
+    //   function(value) { console.log(value) },
+    //   function(error) { /* code if some error */ })
+
 }
 
 
@@ -288,19 +313,44 @@ orderPlaced(){
   let orderDate = new Date().toLocaleString();
   orderData.order_date = orderDate;
   try{
-      let fn =  this.firestore.collection('orders').add(orderData).then(docRef => {
-        this.modalRef =  this.modalService.open(this.popRef, {backdropClass: 'light-blue-backdrop'})
-        this.orderId = docRef.id;
-        this.pizzaService.deleteOrderDetails();
-        this.pizzaService.emptyCart();
-        this.pizzaService.deleteCoupan();
-        this.router.navigate(['/custom']);
-       })     
+    this.pizzaService.createProfile(this.addressInfo)
+        .then(res => {
+         orderData.userId = res.id
+         orderData.address = {location:this.addressInfo.address,type: this.addressInfo.type}
+          let fn =  this.firestore.collection('orders').add(orderData).then(docRef => {
+
+            this.modalRef =  this.modalService.open(this.popRef, {backdropClass: 'light-blue-backdrop'})
+            this.orderId = docRef.id;
+            this.pizzaService.deleteOrderDetails();
+            this.pizzaService.emptyCart();
+            this.pizzaService.deleteCoupan();
+            this.router.navigate(['/custom']);
+            })     
+          });
+     
   }catch(e){
     console.log(e)
   }
  
 }
-
+setSelection(type){
+  if(type == 'pickup'){
+    this.pizzaService.getListofLocations().subscribe((result) => {
+      this.pickUpLocation = result
+    }, (err) => {
+       
+      });
+  }
+}
+onSubmit() {
+  this.submitted = true;
+  // stop here if form is invalid
+  if (this.addressForm.invalid) {
+      return;
+  }
+  this.addressInfo = this.addressForm.value
+  this.addressInfo.type = this.address.selection
+}
+get f() { return this.addressForm.controls; }
 
    }

@@ -363,6 +363,7 @@ a:hover{
     line-height: 24px;
     text-align: center;
     outline: none;
+    border:none;
   }
   button.btn.btn-primary.btn-red{
       background-color: #ff0000;border-color:  #ff0000;
@@ -465,4 +466,22 @@ a:hover{
 .thank-you-pop a i{
 	margin-right:5px;
 	color:#fff;
+}
+.delivery_addr {
+    border: 1px solid #ddd;
+    padding: 20px 20px 10px;
+    margin-bottom: 30px;
+}
+.cart-block {
+    border: 1px solid #ddd;
+  
+    padding: 20px;
+}
+.delivery-form {
+    border: 1px solid #f4f4f4;
+    background: #f2f2f2;
+    padding: 20px;
+}
+.cart-head{
+    padding-left: 20px;
 }
