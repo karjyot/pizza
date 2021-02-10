@@ -15,12 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { LayoutComponent } from './admin/layout/layout.component';
-import { HeaderComponent } from './admin/header/header.component';
-import { SidebarComponent } from './admin/sidebar/sidebar.component';
-import { OrdersComponent } from './admin/orders/orders.component';
-import { LocationsComponent } from './admin/locations/locations.component';
-import { AddLocationComponent } from './admin/locations/add-location/add-location.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,12 +24,8 @@ import { AddLocationComponent } from './admin/locations/add-location/add-locatio
     CheckoutComponent,
     ProductsComponent,
     ProductDetailsComponent,
-    LayoutComponent,
-    HeaderComponent,
-    SidebarComponent,
-    OrdersComponent,
-    LocationsComponent,
-    AddLocationComponent
+
+ 
   ],
   imports: [
     BrowserModule,

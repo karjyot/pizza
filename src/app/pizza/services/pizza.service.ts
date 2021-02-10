@@ -137,7 +137,7 @@ getListofProducts(){
   //       }),)
 }
 getListofLocations(){
-    let query =  this.firestore.collection('locations');
+    let query =  this.firestore.collection('events');
   return query.get()
     .pipe(
         map(snapshot => {

@@ -151,7 +151,7 @@ export class CheckoutComponent implements OnInit{
        * callback function: createPaymentRequest
        * Triggered when: a digital wallet payment button is clicked.
        */
-      createPaymentRequest:()=> {
+      createPaymentRequest()  {
         // The payment request below is provided as
         // guidance. You should add code to create the object
         // programmatically.
@@ -199,7 +199,7 @@ export class CheckoutComponent implements OnInit{
     
             //reject(errors)
           }else{
-            console.log(nonce)
+            console.log(this)
            // resolve(nonce)
           }
           //});
