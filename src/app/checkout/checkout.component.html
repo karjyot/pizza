@@ -275,7 +275,7 @@
                     <label for="address">Address</label>
                     <select class="form-control" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
                         <option value="">Please Select</option>
-                        <option *ngFor="let loc of pickUpLocation" value="{{loc.name}}">{{loc.name}}</option>
+                        <option *ngFor="let loc of pickUpLocation" value="{{loc.name}}({{loc.eventDate.seconds | date:'medium'}})">{{loc.name}}({{loc.eventDate.seconds | date:'medium'}})</option>
                     </select>
                    
                 </div>
@@ -355,7 +355,7 @@
                         <div class="third" id="sq-expiration-date"></div>
                         <div class="third" id="sq-cvv"></div>
                         <div class="third" id="sq-postal-code"></div>
-                        <button id="sq-creditcard" class="button-credit-card"  (click)="this.requestCardNonce($event,order)">Pay ${{ finalPrice?.toFixed(3) }}</button>
+                        <button id="sq-creditcard" class="button-credit-card" [ngClass]="{'disable': !addressInfo}" (click)="this.requestCardNonce($event,order)">Pay ${{ finalPrice?.toFixed(3) }}</button>
                       </div>
                     </div>
                    

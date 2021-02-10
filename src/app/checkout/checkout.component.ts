@@ -151,7 +151,7 @@ export class CheckoutComponent implements OnInit{
        * callback function: createPaymentRequest
        * Triggered when: a digital wallet payment button is clicked.
        */
-      createPaymentRequest()  {
+      createPaymentRequest:()=> {
         // The payment request below is provided as
         // guidance. You should add code to create the object
         // programmatically.
@@ -188,7 +188,8 @@ export class CheckoutComponent implements OnInit{
        * callback function: cardNonceResponseReceived
        * Triggered when: SqPaymentForm completes a card nonce request
        */
-      cardNonceResponseReceived(errors, nonce, cardData,callback)  {
+      cardNonceResponseReceived:(errors, nonce, cardData,callback)=>  {
+        
         //return new Promise(function(resolve, reject) {
           if (errors) {
             // Log errors from nonce generation to the Javascript console
@@ -199,8 +200,7 @@ export class CheckoutComponent implements OnInit{
     
             //reject(errors)
           }else{
-            console.log(this)
-           // resolve(nonce)
+            this.orderPlaced()
           }
           //});
 
@@ -337,6 +337,9 @@ setSelection(type){
   if(type == 'pickup'){
     this.pizzaService.getListofLocations().subscribe((result) => {
       this.pickUpLocation = result
+      this.pickUpLocation.map((value:any) => {
+        value.eventDate.seconds = new Date( value.eventDate.seconds * 1000)
+      });
     }, (err) => {
        
       });
