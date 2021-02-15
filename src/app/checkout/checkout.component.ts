@@ -338,7 +338,8 @@ setSelection(type){
     this.pizzaService.getListofLocations().subscribe((result) => {
       this.pickUpLocation = result
       this.pickUpLocation.map((value:any) => {
-        value.eventDate.seconds = new Date( value.eventDate.seconds * 1000)
+        value.eventStartDate.seconds = new Date( value.eventStartDate.seconds * 1000)
+        value.eventEndDate.seconds = new Date( value.eventEndDate.seconds * 1000)
       });
     }, (err) => {
        

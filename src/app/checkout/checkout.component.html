@@ -275,7 +275,7 @@
                     <label for="address">Address</label>
                     <select class="form-control" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
                         <option value="">Please Select</option>
-                        <option *ngFor="let loc of pickUpLocation" value="{{loc.name}}({{loc.eventDate.seconds | date:'medium'}})">{{loc.name}}({{loc.eventDate.seconds | date:'medium'}})</option>
+                        <option *ngFor="let loc of pickUpLocation" value="{{loc.location}} {{loc.eventStartDate.seconds | date:'medium'}} {{loc.eventEndDate.seconds | date:'medium' }}">{{loc.location}} {{loc.eventStartDate.seconds | date:'medium'}} {{loc.eventEndDate.seconds | date:'medium' }}</option>
                     </select>
                    
                 </div>
