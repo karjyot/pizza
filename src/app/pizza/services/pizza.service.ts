@@ -5,17 +5,15 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map,tap } from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
- //const functions = require('firebase-functions');
- //import { Client, Environment } from 'square'
- //const crypto = require('crypto');
- //const SquareConnect = require('square');
+import { GoogleMapsAPIWrapper,MapsAPILoader } from '@agm/core';
+declare var google: any;
 @Injectable({
   providedIn: 'root'
 })
 export class PizzaService {
   cartItems:any = []
   client:any
-  constructor(private http: HttpClient,private fns: AngularFireFunctions,private firestore: AngularFirestore) { 
+  constructor(private http: HttpClient,private fns: AngularFireFunctions,private firestore: AngularFirestore,private mapsAPI : MapsAPILoader) { 
    
   }
 
@@ -193,6 +191,22 @@ createProfile(data) {
           .then(res => resolve(res), err => reject(err));
   });
 }
- 
+getGeoLocation(address: string){
+  return new Promise<any>((resolve, reject) =>{
+    this.mapsAPI.load().then(() => {
+      let geocoder = new google.maps.Geocoder();
+      geocoder.geocode({
+          'address': address
+        }, (results:any, status:any) => {
+          let latLong = {
+            lat : results[0].geometry.location.lat(),
+            long : results[0].geometry.location.lng(),
+          }
+         resolve(latLong)
+       })
+    })
+  })
+
+}
   
 }

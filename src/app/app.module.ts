@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-
+import { AgmCoreModule,MapsAPILoader } from '@agm/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +36,10 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     NgbModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireFunctionsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAougHgjZKHXMlCm8ixUDgtuxIGrluB-Y4'
+    })
+    
     
   ],
   providers: [AngularFirestore],

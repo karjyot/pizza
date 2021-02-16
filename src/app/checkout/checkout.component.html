@@ -222,17 +222,33 @@
                     
                 </div>
         
+                
+                <div class="mb-3">
+                    <label for="address">Address 1</label>
+                    <textarea class="form-control" id="address"  formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }"></textarea>
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="address">Address 2</label>
+                    <textarea class="form-control" id="address"  formControlName="address2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address2.errors }"></textarea>
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="email">City </label>
+                    <input type="text" class="form-control" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                    
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">State </label>
+                    <input type="text" class="form-control" formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                    
+                </div>
                 <div class="mb-3">
                     <label for="email">Zip </label>
                     <input type="text" class="form-control" formControlName="zip" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zip.errors }">
                     
                 </div>
-                <div class="mb-3">
-                    <label for="address">Address</label>
-                    <textarea class="form-control" id="address"  formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }"></textarea>
-                    
-                </div>
-              
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
             </form>
         </div>

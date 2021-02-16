@@ -54,6 +54,9 @@ export class CheckoutComponent implements OnInit{
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required]],
+      address2: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
       phone: ['', [Validators.required]],
       zip: ['', [Validators.required]],
       
@@ -354,6 +357,11 @@ onSubmit() {
   }
   this.addressInfo = this.addressForm.value
   this.addressInfo.type = this.address.selection
+  this.pizzaService.getGeoLocation(this.addressForm.value.address).then(res => {
+    this.addressInfo.latitude = res.lat
+    this.addressInfo.longitude = res.long
+    
+  }) 
 }
 get f() { return this.addressForm.controls; }
 
