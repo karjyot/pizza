@@ -203,11 +203,11 @@ export class CheckoutComponent implements OnInit{
     
             //reject(errors)
           }else{
-            this.orderPlaced()
+            this.orderPlaced({nonce:nonce})
           }
           //});
 
-       
+       console.log(nonce)
        
         //alert('Nonce received: ' + nonce); /* FOR TESTING ONLY */
   
@@ -311,29 +311,34 @@ calculateCoupanPrice(response){
   }
   
 }
-orderPlaced(){
+orderPlaced(data){
   let orderData = this.pizzaService.getOrderDetails();
   let orderDate = new Date().toLocaleString();
   orderData.order_date = orderDate;
   try{
-    this.pizzaService.createProfile(this.addressInfo)
-        .then(res => {
-         orderData.userId = res.id
-         orderData.address = {location:this.addressInfo.address,type: this.addressInfo.type}
-          let fn =  this.firestore.collection('orders').add(orderData).then(docRef => {
+    data.amount = orderData.totalPrice
+    this.pizzaService.createCharge(data).subscribe(response => {
+      
+      this.pizzaService.createProfile(this.addressInfo)
+          .then(res => {
+          orderData.userId = res.id
+          orderData.address = {location:this.addressInfo.address,type: this.addressInfo.type}
+            let fn =  this.firestore.collection('orders').add(orderData).then(docRef => {
 
-            this.modalRef =  this.modalService.open(this.popRef, {backdropClass: 'light-blue-backdrop'})
-            this.orderId = docRef.id;
-            this.pizzaService.deleteOrderDetails();
-            this.pizzaService.emptyCart();
-            this.pizzaService.deleteCoupan();
-            this.router.navigate(['/custom']);
-            })     
-          });
+              this.modalRef =  this.modalService.open(this.popRef, {backdropClass: 'light-blue-backdrop'})
+              this.orderId = docRef.id;
+              this.pizzaService.deleteOrderDetails();
+              this.pizzaService.emptyCart();
+              this.pizzaService.deleteCoupan();
+              this.router.navigate(['/custom']);
+              })     
+            });
+      })   
      
   }catch(e){
     console.log(e)
   }
+
  
 }
 setSelection(type){

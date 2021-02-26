@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { map,tap } from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
 import { GoogleMapsAPIWrapper,MapsAPILoader } from '@agm/core';
+import {environment} from "./../../../environments/environment"
 declare var google: any;
 @Injectable({
   providedIn: 'root'
@@ -207,6 +208,10 @@ getGeoLocation(address: string){
     })
   })
 
+}
+createCharge(data){
+  return this.http.post(environment.apiEndpoint+'/square/charge',data);
+  
 }
   
 }
