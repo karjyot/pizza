@@ -144,7 +144,12 @@ getListofLocations(){
             snapshot.docs.map(a => {
                 const data = a.data();
                 const id = a.id;
-                items.push({ id, ...data })
+                const currentDate = new Date().getTime()
+                const cutofDate =  data.cutofDate.seconds*1000
+                
+                if(cutofDate>currentDate){
+                  items.push({ id, ...data })
+                }
             })
             return items
         }),)
@@ -192,6 +197,16 @@ createProfile(data) {
           .then(res => resolve(res), err => reject(err));
   });
 }
+
+savePizzaItems(data){
+  return new Promise<any>((resolve, reject) =>{
+    this.firestore
+        .collection("order_items")
+        .add(data)
+        .then(res => resolve(res), err => reject(err));
+});
+}
+
 getGeoLocation(address: string){
   return new Promise<any>((resolve, reject) =>{
     this.mapsAPI.load().then(() => {

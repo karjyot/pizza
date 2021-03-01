@@ -54,7 +54,7 @@ export class CheckoutComponent implements OnInit{
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required]],
-      address2: ['', [Validators.required]],
+      address2: [''],
       city: ['', [Validators.required]],
       state: ['', [Validators.required]],
       phone: ['', [Validators.required]],
@@ -313,25 +313,31 @@ calculateCoupanPrice(response){
 }
 orderPlaced(data){
   let orderData = this.pizzaService.getOrderDetails();
+
   let orderDate = new Date().toLocaleString();
   orderData.order_date = orderDate;
   try{
     data.amount = orderData.totalPrice
     this.pizzaService.createCharge(data).subscribe(response => {
-      
+      let squareResponse = response;
       this.pizzaService.createProfile(this.addressInfo)
           .then(res => {
-          orderData.userId = res.id
-          orderData.address = {location:this.addressInfo.address,type: this.addressInfo.type}
-            let fn =  this.firestore.collection('orders').add(orderData).then(docRef => {
-
-              this.modalRef =  this.modalService.open(this.popRef, {backdropClass: 'light-blue-backdrop'})
-              this.orderId = docRef.id;
-              this.pizzaService.deleteOrderDetails();
-              this.pizzaService.emptyCart();
-              this.pizzaService.deleteCoupan();
-              this.router.navigate(['/custom']);
-              })     
+            orderData.userId = res.id
+            orderData.address = {location:this.addressInfo.address,type: this.addressInfo.type}
+            orderData.payment_id = squareResponse['id'];
+            this.firestore.collection('orders').add(orderData).then(docRef => {
+              let items = Object();
+              items.order_id = docRef.id
+              items.totalItems = orderData.totalItems
+              this.pizzaService.savePizzaItems(items).then(res => {
+                this.modalRef =  this.modalService.open(this.popRef, {backdropClass: 'light-blue-backdrop'})
+                this.orderId = docRef.id;
+                this.pizzaService.deleteOrderDetails();
+                this.pizzaService.emptyCart();
+                this.pizzaService.deleteCoupan();
+                this.router.navigate(['/custom']);
+              })
+            })     
             });
       })   
      
@@ -343,6 +349,8 @@ orderPlaced(data){
 }
 setSelection(type){
   if(type == 'pickup'){
+    this.addressForm.controls['city'].clearValidators();
+    this.addressForm.controls['state'].clearValidators();
     this.pizzaService.getListofLocations().subscribe((result) => {
       this.pickUpLocation = result
       this.pickUpLocation.map((value:any) => {
@@ -352,6 +360,11 @@ setSelection(type){
     }, (err) => {
        
       });
+  }else{
+    this.addressForm.controls['city'].setValidators([Validators.required]);
+    this.addressForm.controls['city'].updateValueAndValidity();
+    this.addressForm.controls['state'].setValidators([Validators.required]);
+    this.addressForm.controls['state'].updateValueAndValidity();
   }
 }
 onSubmit() {
