@@ -142,7 +142,7 @@ getListofLocations(){
         map(snapshot => {
             let items = [];
             snapshot.docs.map(a => {
-                const data = a.data();
+                const data:any = a.data();
                 const id = a.id;
                 const currentDate = new Date().getTime()
                 const cutofDate =  data.cutofDate.seconds*1000
