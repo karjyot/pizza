@@ -225,7 +225,7 @@ getGeoLocation(address: string){
 
 }
 createCharge(data){
-  return this.http.post(environment.apiEndpoint+'/square/charge',data);
+  return this.http.post(environment.apiEndpoint+'/api/payment',data);
   
 }
   
